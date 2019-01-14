@@ -10,6 +10,9 @@ endif
 include config.mk
 include common.mk
 
+export ARCH
+export CROSS_COMPILE
+
 #------------------------------------------------------------------------------
 # All
 #------------------------------------------------------------------------------
@@ -196,7 +199,7 @@ boot-build:	make-target
 	@echo "Stage: $@"
 	@echo "-------------------------------------------------------------------"
 	mkbootimg --kernel $(KERNEL_ROOT)/arch/arm/boot/zImage-dtb \
-		--ramdisk $(IMAGE_SRC_DIR)/ramdisk.img --base $(KERNEL_LOADADDR) \
+		--ramdisk $(RAMDISK_IMG) --base $(KERNEL_LOADADDR) \
 		-o $(IMAGE_DST_DIR)/$(BOOT_IMG_TARGET)
 	#cp -a $(foreach ko,$(KERNEL_DRIVERS),$(KERNEL_ROOT)/$(ko)) $(IMAGE_DST_DIR)
 
@@ -213,7 +216,7 @@ recovery-build:	make-target
 	@echo "Stage: $@"
 	@echo "-------------------------------------------------------------------"
 	mkbootimg --kernel $(KERNEL_ROOT)/arch/arm/boot/zImage-dtb \
-		--ramdisk $(IMAGE_SRC_DIR)/ramdisk-recovery.img --base $(KERNEL_LOADADDR) \
+		--ramdisk $(RECOVERY_RAMDISK_IMG) --base $(KERNEL_LOADADDR) \
 		-o $(IMAGE_DST_DIR)/$(RECOVERY_IMG_TARGET)
 
 #------------------------------------------------------------------------------

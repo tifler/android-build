@@ -15,4 +15,4 @@ INSTALL_ROOT			?= $(shell pwd)
 FW_SRC_DIR				?= /home/tifler/images/latest-fw
 
 WORK_CPUS				?= 6
-
+ARCH					?= arm

@@ -13,7 +13,7 @@ if [ .$CPUS == . ]; then
 fi
 
 case $PRODUCT in
-    caterpillar|odysseus|franklin|alexandria|uroad)
+    caterpillar|odysseus|franklin|alexandria|uroad|papagoegg)
         ;;
     *)
         PRODUCT=$DEF_PRODUCT
@@ -32,7 +32,7 @@ case $PRODUCT in
     caterpillar|odysseus|franklin|alexandria)
         LUNCH_NAME=full_$PRODUCT-$MODE
         ;;
-    uroad)
+    uroad|papagoegg)
         LUNCH_NAME=$PRODUCT-$MODE
         ;;
     *)
@@ -45,7 +45,8 @@ export OUT_DIR=out-$MODE
 source build/envsetup.sh
 lunch $LUNCH_NAME
 make -j${CPUS} ${MAKE_SUBCMD}
+ret=$?
 
 jack-admin kill-server
 
-exit $?
+exit $ret
